@@ -4,27 +4,56 @@
   <title>Tahmin Oyunu</title>
 </head>
 <body style="font-family:sans-serif;text-align:center;margin-top:50px;">
-  <h1>Sayı Tahmin Oyunu 🎮</h1>
+
+  <h1>🎮 Sayı Tahmin Oyunu</h1>
   <p id="mesaj">1 ile 100 arasında sayı tuttum!</p>
 
   <input type="number" id="tahmin" placeholder="Tahmin gir">
   <button onclick="kontrol()">Tahmin Et</button>
 
+  <p id="hak">Kalan Hak: 10</p>
+  <p id="denemeler">Tahminler: -</p>
+
   <script>
     let sayi = Math.floor(Math.random() * 100) + 1;
 
+    let hak = 10;
+    let tahminListesi = [];
+
     function kontrol() {
-      let tahmin = document.getElementById("tahmin").value;
+      let tahmin = Number(document.getElementById("tahmin").value);
+
       let mesaj = document.getElementById("mesaj");
+      let hakText = document.getElementById("hak");
+      let denemeler = document.getElementById("denemeler");
+
+      if (hak <= 0) {
+        mesaj.innerText = "❌ Hakların bitti! Oyun bitti.";
+        return;
+      }
+
+      hak--;
+      tahminListesi.push(tahmin);
+
+      hakText.innerText = "Kalan Hak: " + hak;
+      denemeler.innerText = "Tahminler: " + tahminListesi.join(", ");
 
       if (tahmin < sayi) {
-        mesaj.innerText = "Daha büyük!";
-      } else if (tahmin > sayi) {
-        mesaj.innerText = "Daha küçük!";
-      } else {
-        mesaj.innerText = "🎉 Bildin!";
+        mesaj.innerText = "📈 Daha büyük!";
+      } 
+      else if (tahmin > sayi) {
+        mesaj.innerText = "📉 Daha küçük!";
+      } 
+      else {
+        mesaj.innerText = "🎉 Bildin! Tebrikler!";
+        hak = 0;
+      }
+
+      if (hak === 0 && tahmin !== sayi) {
+        mesaj.innerText = "❌ Kaybettin! Doğru sayı: " + sayi;
       }
     }
   </script>
+
 </body>
 </html>
