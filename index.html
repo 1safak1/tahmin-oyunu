@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Tahmin Oyunu</title>
+</head>
+<body style="font-family:sans-serif;text-align:center;margin-top:50px;">
+  <h1>Sayı Tahmin Oyunu 🎮</h1>
+  <p id="mesaj">1 ile 100 arasında sayı tuttum!</p>
+
+  <input type="number" id="tahmin" placeholder="Tahmin gir">
+  <button onclick="kontrol()">Tahmin Et</button>
+
+  <script>
+    let sayi = Math.floor(Math.random() * 100) + 1;
+
+    function kontrol() {
+      let tahmin = document.getElementById("tahmin").value;
+      let mesaj = document.getElementById("mesaj");
+
+      if (tahmin < sayi) {
+        mesaj.innerText = "Daha büyük!";
+      } else if (tahmin > sayi) {
+        mesaj.innerText = "Daha küçük!";
+      } else {
+        mesaj.innerText = "🎉 Bildin!";
+      }
+    }
+  </script>
+</body>
+</html>
